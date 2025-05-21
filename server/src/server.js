@@ -11,7 +11,10 @@ app.use(cors([process.env.CLIENT_URL,process.env.ADMIN_URL]))
 app.use(bodyParser.json());//để có thể truyền được chuỗi json
 //để phân tích và trích xuất dữ liệu từ phần thân (body) của các yêu cầu HTTP có định dạng "x-www-form-urlencoded". Đây là một trong những loại dữ liệu phổ biến được sử dụng khi gửi dữ liệu từ một trang web HTML thông qua form.
 app.use(bodyParser.urlencoded({ extended: true, limit: "10mb" }))
-
+// Ping Redis mỗi 5 phút
+setInterval(async () => {
+     console.log("")
+}, 2 * 60 * 1000); // 5 phút
 routes(app)
 mongoose.connect(process.env.MONGODB_URL)
     .then(() => console.log("connected successfully!"))
